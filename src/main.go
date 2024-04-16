@@ -1,14 +1,13 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
-  e := gin.Default()
-	e.GET("/", func(c *gin.Context){
-		c.JSON(200, gin.H{
-			"status": "success",
-		})
-	})
-
-	e.Run(":8000")
+	router := gin.Default()
+	apiV1 := router.Group("/api/v1")
+	apiV1.GET("/users", controllers.UserLists)
+	
+	router.Run(":8000")
 }
